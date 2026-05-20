@@ -17,7 +17,8 @@ The project demonstrates real-world challenges in deploying applications across 
 
 # 🏗️ Architecture Overview
 
-![Architecture](images/architecture.png)
+<img width="2816" height="1536" alt="dj" src="https://github.com/user-attachments/assets/54569e2f-664c-4063-9d04-6068a097c4df" />
+
 
 ---
 
@@ -113,3 +114,14 @@ The deployment strategy was updated to ensure application availability across al
 - High availability architecture concepts
 - Troubleshooting distributed deployments
 - Scaling and deployment consistency challenges
+
+
+
+# ⚠️ Failure Scenarios Considered
+
+- Application deployed on partial instances
+- Unhealthy target group instances
+- Incorrect Security Group rules
+- ALB health check failures
+- SSH access issues through Bastion Host
+- Traffic routing inconsistencies
