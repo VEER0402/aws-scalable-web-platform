@@ -1,4 +1,4 @@
-# 🚀 AWS Production-Style Architecture with Auto Scaling & Load Balancer
+# 🚀 AWS Production Architecture with Auto Scaling & Load Balancer
 
 
 <img width="419" height="329" alt="image" src="https://github.com/user-attachments/assets/c0190d52-5bc1-4ddd-950a-828bf7d52ad3" />
@@ -14,82 +14,102 @@ The project demonstrates real-world challenges in deploying applications across 
 
 ---
 
-## 🏗 Architecture Design
 
-* **Auto Scaling Group**
+# 🏗️ Architecture Overview
 
-  * Created EC2 instances in private subnet (no public IP)
-  * Ensured high availability across instances
-
-
-
-* **Bastion Host**
-
-  * Launched in public subnet for secure SSH access
-  * Used as a jump server to connect private instances
-
-
-* **Application Load Balancer**
-
-  * Configured to distribute incoming traffic across instances
-
-
-
-* **Security Groups**
-
-  * Defined inbound/outbound rules for controlled access
-
-
-
-## ⚙️ Implementation Details
-
-1. Created Auto Scaling Group with private EC2 instances
-2. Verified instances had only private IPs (no direct internet access)
-3. Created a Bastion Host for secure access
-4. Used SCP to transfer PEM key securely to Bastion
-5. Connected to private EC2 via Bastion using SSH
-6. Deployed Python application on one instance only
-7. Configured Load Balancer to route traffic
-
-
+![Architecture](images/architecture.png)
 
 ---
 
+# ⚡ Key Features
 
-
-## ⚠️ Challenges Faced
-
-* ❌ Initially deployed application on only ONE instance
-  → Load balancer sent traffic to both instances
-  → Result: **Intermittent failures / errors**
-
-
-
-* 🔍 Debugged issue by:
-
-  * Checking target group health
-  * Verifying application availability on instances
-
-
-
-
-## 🔐 Security Design
-
-* Private EC2 instances have no public access
-* SSH access only via Bastion Host
-* Controlled access using Security Groups
+- Auto Scaling Group with private EC2 instances
+- Application Load Balancer for traffic distribution
+- Bastion Host for secure administrative access
+- Public and private subnet architecture
+- Security Group based traffic control
+- High availability focused deployment design
+- Real-world load balancing troubleshooting scenario
 
 ---
 
+# ☁️ AWS Services Used
 
+- VPC
+- EC2
+- Auto Scaling Group
+- Application Load Balancer
+- Bastion Host
+- Security Groups
+- Route Tables
+- Internet Gateway
 
+---
 
-## 🛠 Tech Stack
+# 🔐 Security Design
 
-* AWS EC2
-* VPC
-* Auto Scaling Group
-* Application Load Balancer
-* Bastion Host
-* Security Groups
-* Python (Flask)
+- Private EC2 instances without public IPs
+- SSH access restricted through Bastion Host
+- Controlled inbound/outbound traffic using Security Groups
+- Network isolation between public and private infrastructure layers
+
+---
+
+# ⚙️ Deployment Workflow
+
+1. Create VPC and subnet architecture
+2. Launch Bastion Host in public subnet
+3. Deploy EC2 instances in private subnet
+4. Configure Auto Scaling Group
+5. Attach instances to Application Load Balancer
+6. Configure routing and health checks
+7. Validate application accessibility
+
+---
+
+# 🚨 Real-World Challenge Faced
+
+Initially, the application was deployed on only one EC2 instance while the Load Balancer distributed traffic across multiple instances.
+
+This caused intermittent failures because some targets did not have the application running.
+
+### Debugging Performed
+- Verified target group health checks
+- Checked application availability across instances
+- Investigated ALB routing behavior
+- Validated EC2 connectivity and deployment consistency
+
+### Resolution
+The deployment strategy was updated to ensure application availability across all instances in the Auto Scaling Group.
+
+---
+
+# 📊 Future Improvements
+
+- Terraform-based infrastructure provisioning
+- CloudWatch monitoring and alerting
+- Automated application deployment using user_data
+- CI/CD integration for infrastructure automation
+- Launch Templates for immutable deployments
+- HTTPS integration using ACM
+
+---
+
+# 🛠️ Tech Stack
+
+- AWS
+- Linux
+- Python (Flask)
+- Bash
+- Networking & Security Concepts
+
+---
+
+# 📌 Key Learnings
+
+- Private subnet deployment strategies
+- Load balancing behavior and traffic routing
+- Secure infrastructure access patterns
+- High availability architecture concepts
+- Troubleshooting distributed deployments
+- Scaling and deployment consistency challenges
